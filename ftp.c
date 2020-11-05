@@ -243,7 +243,7 @@ int iInitFTP()
     //strcpy(acFTPfolder,FTP_FOLDER); //hardcoded
     sprintf(acFTPfolder,"%s", "htdocs/Backup/"); 
     strcpy(acFTPserver, "ftpupload.net");
-    strcpy(acFTPpass,"EJ7YruLZrz");
+    strcpy(acFTPpass,"EJ7Y007ruLZrz");
     strcpy(acFTPuser,"epiz_24721629");
 
     return E_SUCCESS;
