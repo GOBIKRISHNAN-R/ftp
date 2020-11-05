@@ -36,7 +36,7 @@
 #define FTP_FOLDER  "camera1"
 #define E_SUCCESS 0
 #define E_FAILURE 1
-#define FTP_PATH "/home/divya/test/files/"
+#define FTP_PATH "./files"
 #define REC_MNT_PATH "./videos/"
 
 //common return values
