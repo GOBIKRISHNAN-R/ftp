@@ -1,11 +1,11 @@
 /****************************************************************************
- *   ProjectName : FSWCAM
+ *   ProjectName : 
  *
  *   COMPONENT   : ftp.c
  *
  *    Author     : Gobikrishnan Ramamoorthi
  *
- *    DATE       : Mon Jul 30 17:12:05 IST 2018
+ *    DATE       : 
  *
  *   Description : Delete a file to the cloud server
  *
@@ -19,9 +19,6 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <string.h>
-
-//#include "common.h"
-//#include "rtmp.h"
 
 //common return values
 #define G_PASS 0
@@ -67,7 +64,6 @@ int main(int argc, char **argv)
 {
     CURL *curl;
     CURLcode res;
-    //struct curl_slist *headerlist = NULL;
 
     if(argc != 6)
     {
@@ -87,7 +83,6 @@ int main(int argc, char **argv)
     sprintf(caFtpUrl, "ftp://%s/%s/", caFtpHost, caCamera );
     printf("caFtpUrl = %s\n", caFtpUrl);
   
-    //static const char buf_1 [] = "DELE " caFile;
     Char buf_1 [MAXSTR] = {'\0'} ;
     sprintf(buf_1, "DELE %s", caFile);
     curl = curl_easy_init();
@@ -100,10 +95,8 @@ int main(int argc, char **argv)
         curl_easy_setopt(curl, CURLOPT_PASSWORD, caFtpPwd);
         curl_easy_setopt( curl, CURLOPT_VERBOSE, 1L);
         curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, buf_1);
-        //curl_easy_setopt(curl, CURLOPT_POSTQUOTE, "DELE video_15052018_102207.mp4");
 
         /* pass in that last of FTP commands to run after the transfer */ 
-        //curl_easy_setopt(curl, CURLOPT_POSTQUOTE, headerlist);
         printf("After curl_easy_setopt\n");
         res = curl_easy_perform(curl);
         if(CURLE_OK != res) 
@@ -113,7 +106,6 @@ int main(int argc, char **argv)
         }
     }
     /* clean up the FTP commands list */ 
-    //curl_slist_free_all(headerlist);
 
     curl_easy_cleanup(curl);
     return 0;
@@ -137,8 +129,7 @@ int iInitFTP()
     //strcpy(acFTPfolder,FTP_FOLDER); //hardcoded
     sprintf(caCamera,"%s", "/htdocs/Backup/");
     strcpy(caFtpHost,"ftpupload.net");
-    strcpy(caFtpPwd,"EJ7YruLZrz");
-    //strcpy(acFTPpass,"C5M%8*P&Ym"); // Hardcoding for demo
+    strcpy(caFtpPwd,"EJ7Y007ruLZrz")
     strcpy(caFtpUser,"epiz_24721629");
 
     return 0;
