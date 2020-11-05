@@ -169,8 +169,7 @@ int main(void)
 int isExists(char *caFile)
 {
     struct stat sb;
-
-    //if (stat(folderr, &sb) == 0 && S_ISDIR(sb.st_mode))
+	
     if (stat(caFile, &sb) == 0)
     {
         printf("File exists\n");
@@ -279,24 +278,7 @@ int uploadfile(char *pcFilename,char *pcFile)
     printf("%s\n",acCurlurl);
 
     fd = fopen(pcFilename,"rb"); /* open file to upload */
-/*
-    if(!fd)
-    {
-        printf("File not opened\n");
 
-        sprintf(acBuf,"unlink %s%s",FTP_PATH,pcFile);
-        printf("%s\n",acBuf);
-        printf("file to be removed=(%s)\n",acBuf);
-
-        if(system(acBuf) != G_PASS)
-        {
-            printf("Error in deleting uploaded file\n");
-        }
-
-
-        return E_FAILURE; // can't continue 
-    }
-*/
     /* to get the file size */
     if(fstat(fileno(fd), &file_info) != 0)
     {
@@ -319,15 +301,11 @@ int uploadfile(char *pcFilename,char *pcFile)
         if(curl) 
         {
             /* upload to this place */
-            //curl_easy_setopt(curl, CURLOPT_URL,"ftp://52.89.22.31/camera1/wifi.sh");
             curl_easy_setopt(curl, CURLOPT_URL,acCurlurl);
 
-            //curl_easy_setopt(curl, CURLOPT_USERNAME, "Administrator");
             curl_easy_setopt(curl, CURLOPT_USERNAME,acFTPuser);
-            //curl_easy_setopt(curl, CURLOPT_PASSWORD, "C5M%8*P&Ym");
             curl_easy_setopt(curl, CURLOPT_PASSWORD,acFTPpass);
             curl_easy_setopt(curl, CURLOPT_FTP_CREATE_MISSING_DIRS, 1L);
-            //curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "alos");
             /* tell it to "upload" to the URL */
             curl_easy_setopt(curl, CURLOPT_UPLOAD, 1L);
     
@@ -362,20 +340,7 @@ int uploadfile(char *pcFilename,char *pcFile)
             curl_easy_cleanup(curl);
         }
         fclose(fd);
-/*
-        //after uploading removing the file
-        //sprintf(acBuf,"rm %s%s",FTP_PATH,pcFile); //DIVYA
-        // After uploading success, unlink the file 
-        sprintf(acBuf,"unlink %s%s",FTP_PATH,pcFile);
-        printf("%s\n",acBuf);
-        printf("file to be removed=(%s)\n",acBuf);
-   
-        if(system(acBuf) != G_PASS)
-        {
-            printf("Error in deleting uploaded file\n");
-            return E_FAILURE;
-        }
- */
+
         /* Remove actual file from mount partition */
         memset(acBuf, '\0', sizeof(acBuf));
         sprintf(acBuf,"rm %s%s", REC_MNT_PATH, pcFile);
@@ -440,26 +405,7 @@ Int iCheckftpfiles()
     fgets(acEntry ,sizeof(acEntry)-1 ,fb);
     pclose(fb);
     printf("1. read entry=(%s)\n",acEntry);
-/*
-    if(acEntry[0] != '\0')
-    {
-        sscanf(acEntry,"%[^ \n]",acEntry);
-        printf("acFilename=%s \n",acEntry);
 
-        sprintf(acDeleteftpfile, "./ftp_delete %s %s %s %s %s", acFTPserver, acFTPuser, acFTPpass, acFTPfolder, acEntry);
-
-        printf("acDeleteftpfile = %s\n",acDeleteftpfile);
-
-        iRet = system(acDeleteftpfile);
-        if(iRet == E_SUCCESS)
-        {
-            return E_SUCCESS;
-        }
-        else
-        {
-            return E_FAILURE;
-        }
-    }*/
     return E_SUCCESS;
 }
 
